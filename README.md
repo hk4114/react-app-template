@@ -25,17 +25,16 @@ husky + lint
 - assets 静态资源 图片等
 - tests 需要的话
 
-
+- [x] 错误边界
 - [ ] 请求拦截与响应拦截
-- [ ] filter-table
-- [ ] 状态管理 hox + hooks?
-- [ ] 动态主题 styled-components
-- [ ] 配置 css 预处理器 sass autofixer 等
-- [ ] 国际化
-- [ ] 工程化，代码格式化 eslint prettier
-- [ ] 配置 husky + lint-staged
 - [ ] 配置文件引用别名
-- [ ] 错误边界
+- [ ] 配置 husky + lint-staged
+- [ ] 工程化，代码格式化 eslint prettier
+- [ ] 配置 css 预处理器 sass autofixer 等
+- [ ] 动态主题 styled-components
+- [ ] 状态管理 hox + hooks?
+- [ ] 国际化
+- [ ] filter-table
 
 
 
@@ -120,4 +119,62 @@ npx mrm lint-staged
     ]
   }
 }
+```
+
+## 错误边界
+组件使用代码
+```js
+import React, { Component } from 'react';
+import ErrorBoundary from './ErrorBoundary';
+
+
+
+class BuggyCounter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { counter: 0 };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(({ counter }) => ({
+      counter: counter + 1
+    }));
+  }
+
+  render() {
+    if (this.state.counter === 5) {
+      throw new Error('Error!');
+    }
+    return <h1 onClick={this.handleClick}>{this.state.counter}</h1>;
+  }
+}
+
+const onReset = () => {
+  console.log('已重置')
+}
+
+const renderFallback = (props) => {
+  return (
+    <div>
+      出错啦，你可以<button onClick={props.resetErrorBoundary}>重置</button>
+    </div>
+  )
+}
+
+const BuggyCounterWithErrorBoundary = () => {
+  return (
+    <ErrorBoundary
+      onReset={onReset}
+      fallbackRender={renderFallback}
+      onError={(a, b) => console.log(a, b)}
+      // 变更resetKeys实现重置
+      resetKeys={+new Date()}
+    >
+      <BuggyCounter />
+    </ErrorBoundary>
+  )
+}
+
+export default BuggyCounterWithErrorBoundary
 ```
