@@ -37,7 +37,6 @@ husky + lint
 - [ ] filter-table
 
 
-
 ## 初始化项目
 
 ```sh
@@ -178,3 +177,13 @@ const BuggyCounterWithErrorBoundary = () => {
 
 export default BuggyCounterWithErrorBoundary
 ```
+
+## lock down the node and yarn version
+```json
+"engines": {
+  "node": "^16.0.0",
+  "yarn": "^1.20.0"
+},
+```
+
+## setup prettier and eslint
