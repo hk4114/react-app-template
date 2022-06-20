@@ -187,3 +187,34 @@ export default BuggyCounterWithErrorBoundary
 ```
 
 ## setup prettier and eslint
+```sh
+yarn add prettier
+```
+
+- 配置 `.prettierrc`
+- vscode prettier 插件 
+- 修改配置 ctrl + p `>settings`  `editor.formatOnSave` 编辑器默认格式化程序 `editor.defaultFormatter` 
+```json
+{
+  "[javascriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+```
+
+```sh
+npm info "eslint-config-airbnb@latest" peerDependencies
+npx install-peerdeps --dev eslint-config-airbnb
+yarn add eslint @babel/core @babel/eslint-parser eslint-config-prettier -D
+npx eslint --init
+```
+
+- 配置 `.eslintrc`
+- vscode eslint 插件 
+```json
+"scripts": {
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
+  },
+```

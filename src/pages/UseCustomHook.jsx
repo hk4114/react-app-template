@@ -1,7 +1,7 @@
-import { useState, useRef } from "react";
-import useOnClickOutside from "../hooks/useOnClickOutside";
+import React, { useState, useRef } from 'react';
+import useOnClickOutside from '../hooks/useOnClickOutside';
 
-const Example = () => {
+export default function Example() {
   // define ref to target modal when its rendered
   const modalRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +24,4 @@ const Example = () => {
       ) : null}
     </div>
   );
-};
-
-export default Example;
+}
